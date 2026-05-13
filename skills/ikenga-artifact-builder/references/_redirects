@@ -1,0 +1,8 @@
+# Cloudflare Pages: strip the .html suffix so URLs read cleanly in
+# social posts and the address bar (e.g. /cfo-daily instead of
+# /cfo-daily.html). Without these rewrites Pages 404s on the bare path.
+
+/hello-world      /hello-world.html      200
+/cfo-daily        /cfo-daily.html        200
+/ceo-overview     /ceo-overview.html     200
+/ikenga-symbol    /ikenga-symbol.html    200

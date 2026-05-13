@@ -1,0 +1,140 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Ikenga artifact builder — references</title>
+  <meta name="description" content="Live reference artifacts for the ikenga-artifact-builder Claude Code skill." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&family=Special+Elite&display=swap" />
+  <style>
+    :root {
+      --paper: #F1E8D0;
+      --paper-2: #E9DEBE;
+      --ink: #2A2520;
+      --ink-soft: #5C5248;
+      --brick: #A0421F;
+      --rule: rgba(42, 37, 32, 0.18);
+    }
+    * { box-sizing: border-box; }
+    html, body { margin: 0; padding: 0; background: var(--paper); color: var(--ink); }
+    body {
+      font-family: 'Source Serif 4', Georgia, serif;
+      font-optical-sizing: auto;
+      letter-spacing: 0.005em;
+      -webkit-font-smoothing: antialiased;
+      min-height: 100vh;
+    }
+    .display { font-family: 'Special Elite', 'Courier New', monospace; letter-spacing: 0.02em; }
+    .mono { font-family: ui-monospace, 'IBM Plex Mono', Menlo, monospace; }
+    .eyebrow {
+      font-family: 'Special Elite', monospace;
+      letter-spacing: 0.22em;
+      font-size: 11px;
+      text-transform: uppercase;
+      color: var(--brick);
+    }
+    .wrap { max-width: 880px; margin: 0 auto; padding: 64px 28px 96px; }
+    header { border-bottom: 1px solid var(--rule); padding-bottom: 28px; margin-bottom: 40px; }
+    h1 { font-family: 'Special Elite', monospace; font-size: 48px; line-height: 1; margin: 14px 0 12px; font-weight: normal; }
+    header p { color: var(--ink-soft); font-size: 17px; line-height: 1.55; margin: 0; max-width: 60ch; }
+    .card {
+      display: grid;
+      grid-template-columns: 90px 1fr;
+      gap: 24px;
+      padding: 22px 0;
+      border-bottom: 1px dashed var(--rule);
+      align-items: baseline;
+    }
+    .card .num {
+      font-family: 'Special Elite', monospace;
+      color: var(--brick);
+      letter-spacing: 0.08em;
+      font-size: 22px;
+    }
+    .card h2 { font-family: 'Special Elite', monospace; font-size: 22px; margin: 0 0 6px; font-weight: normal; }
+    .card h2 a { color: var(--ink); text-decoration: none; }
+    .card h2 a:hover { color: var(--brick); }
+    .card .meta { font-size: 12px; color: var(--ink-soft); margin-bottom: 8px; }
+    .card p { margin: 0; line-height: 1.55; font-size: 16px; }
+    .card .open {
+      display: inline-block;
+      margin-top: 10px;
+      font-family: 'Special Elite', monospace;
+      font-size: 13px;
+      color: var(--brick);
+      text-decoration: none;
+      border-bottom: 1px solid currentColor;
+    }
+    .card .open:hover { color: var(--ink); }
+    footer { margin-top: 56px; padding-top: 24px; border-top: 1px solid var(--rule); font-size: 12px; color: var(--ink-soft); display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
+    footer a { color: var(--ink-soft); }
+    footer a:hover { color: var(--brick); }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <div class="eyebrow">ikenga-artifact-builder · references</div>
+      <h1>Four artifacts.</h1>
+      <p>Single-file HTML the agent can produce instead of markdown. Each renders standalone in any browser; opened inside the Ikenga shell, the same file lights up with live data. Click any to read.</p>
+    </header>
+
+    <section>
+      <article class="card">
+        <div class="num">01</div>
+        <div>
+          <h2><a href="/hello-world">Hello, Artifact</a></h2>
+          <div class="meta">~150 lines · 1 fetch source · the floor</div>
+          <p>The smallest valid Ikenga artifact. Lists users from a public API; falls back to mock data when offline. Read this first.</p>
+          <a class="open" href="/hello-world">open ↗</a>
+        </div>
+      </article>
+
+      <article class="card">
+        <div class="num">02</div>
+        <div>
+          <h2><a href="/cfo-daily">CFO Daily</a></h2>
+          <div class="meta">~330 lines · 4 source types (supabase + sql + fetch + file) · finance</div>
+          <p>KPI tiles, AR aging with overdue tier highlighting, FX rates, cash-by-account chart. Three refresh modes — manual, interval, and watch.</p>
+          <a class="open" href="/cfo-daily">open ↗</a>
+        </div>
+      </article>
+
+      <article class="card">
+        <div class="num">03</div>
+        <div>
+          <h2><a href="/ceo-overview">CEO Overview</a></h2>
+          <div class="meta">~470 lines · 6 sources spanning all four types · exec</div>
+          <p>Daily digest: KPIs, agent activity, notifications, calendar, recent docs, team signals. Cross-artifact links — the CFO agent run jumps to <span class="mono">/cfo-daily</span>.</p>
+          <a class="open" href="/ceo-overview">open ↗</a>
+        </div>
+      </article>
+
+      <article class="card">
+        <div class="num">04</div>
+        <div>
+          <h2><a href="/ikenga-symbol">Ikenga, the symbol</a></h2>
+          <div class="meta">~1000 lines · 1 article fetch · editorial scrollytelling</div>
+          <p>A long-form cultural piece on the Igbo symbol the product line is named after. Real Wikimedia museum imagery, 12 numbered citations, interactive symbolism pins, three-forms tab comparator. The case in point for "replaces a long markdown writeup."</p>
+          <a class="open" href="/ikenga-symbol">open ↗</a>
+        </div>
+      </article>
+    </section>
+
+    <footer>
+      <div>
+        <span class="display">ikenga-artifact-builder</span>
+        <span style="margin: 0 8px;">·</span>
+        Apache-2.0
+      </div>
+      <div>
+        <a href="https://github.com/Royalti-io/ikenga-artifact-builder">github</a>
+        <span style="margin: 0 8px;">·</span>
+        <span class="mono">npx skills add Royalti-io/ikenga-artifact-builder</span>
+      </div>
+    </footer>
+  </div>
+</body>
+</html>

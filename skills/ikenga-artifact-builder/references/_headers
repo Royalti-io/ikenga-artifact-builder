@@ -1,0 +1,11 @@
+# Cloudflare Pages: shape response headers for the reference artifacts.
+# Cache aggressively at the edge (the files are immutable per commit) but
+# allow short browser cache so a fresh deploy reaches viewers quickly.
+
+/*.html
+  Cache-Control: public, max-age=300, s-maxage=86400
+  X-Content-Type-Options: nosniff
+  Referrer-Policy: no-referrer-when-downgrade
+
+/
+  Cache-Control: public, max-age=300, s-maxage=86400
