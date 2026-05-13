@@ -1,0 +1,22 @@
+{
+  "name": "@ikenga/skill-artifact-builder",
+  "version": "0.1.0",
+  "description": "Claude Code skill that authors single-file HTML artifacts that light up with live data inside the Ikenga shell.",
+  "keywords": ["claude", "claude-code", "agent-skills", "skills", "ikenga", "artifacts"],
+  "homepage": "https://ikenga.ai",
+  "bugs": {
+    "url": "https://github.com/royalti-io/ikenga-artifact-builder/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/royalti-io/ikenga-artifact-builder.git"
+  },
+  "license": "Apache-2.0",
+  "private": true,
+  "engines": {
+    "node": ">=18"
+  },
+  "scripts": {
+    "test": "node --test"
+  }
+}
