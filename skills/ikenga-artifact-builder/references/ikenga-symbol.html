@@ -1,0 +1,1000 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Ikenga — The Igbo Symbol of Power</title>
+
+  <!--
+    Editorial / scrollytelling artifact. Shows that the Ikenga artifact
+    format isn't only for dashboards — it works for long-form content
+    that would otherwise be a markdown wall.
+
+    Field-journal aesthetic: aged paper, iron-gall ink, brick-red
+    marginalia, typewriter display font, handwritten gloss, faint
+    pencil-grid background. Real CC-licensed museum imagery from
+    Wikimedia Commons.
+
+    Same fallback contract as every Ikenga artifact: works offline from
+    inline mock data; would resolve live CMS content inside the shell.
+  -->
+
+  <!-- ───── manifest ───── -->
+  <script type="application/json" id="ikenga-manifest">
+  {
+    "format": "ikenga-artifact",
+    "formatVersion": "0.1",
+    "id": "ikenga-symbol",
+    "name": "Ikenga — The Igbo Symbol of Power",
+    "version": "0.1.0",
+    "description": "Editorial scrollytelling piece on Ikenga the Igbo cultural symbol — the origin of the product line's name.",
+    "license": "Apache-2.0",
+    "icon": { "lucide": "scroll" },
+    "dataSources": {
+      "content": {
+        "type": "fetch",
+        "url": "https://cms.royalti.io/articles/ikenga-symbol",
+        "refresh": { "mode": "manual" }
+      }
+    },
+    "fallback": {
+      "mode": "mock",
+      "dataTag": "ikenga-mock-data",
+      "banner": "Standalone preview — open in the Ikenga shell to comment + edit via AI."
+    },
+    "pin": { "suggested": false },
+    "notes": { "enabled": true },
+    "requires": { "ikenga": ">=0.4", "bridge": "^1.0" }
+  }
+  </script>
+
+  <!-- ───── mock data ───── -->
+  <script type="application/json" id="ikenga-mock-data">
+  {
+    "content": {
+      "meta": {
+        "eyebrow": "FIELD NOTES · CULTURAL ORIGIN",
+        "title": "Ikenga",
+        "subtitle": "The Igbo Symbol of Power, Achievement, and the Strength of the Right Hand",
+        "kicker": "A field-journal reading of the cultural figure that gave the Ikenga product line its name.",
+        "byline": "Compiled from Igbo cultural sources",
+        "dateline": "Vol. 0 · 2026"
+      },
+      "sections": [
+        {
+          "id": "intro",
+          "number": "01",
+          "eyebrow": "INTRODUCTION",
+          "title": "What is Ikenga?",
+          "lede": "Ikenga (literally \"the place of strength\") is a horned anthropomorphic figure central to the spiritual and personal life of the Igbo people of southeastern Nigeria[^smarthistory] — a carved embodiment of a man's achievements, ambition, and the power of his right hand.[^britannica]",
+          "facets": [
+            { "label": "PERSONAL SHRINE", "text": "Kept in a man's obi (meeting house) as the focus of prayer, oath-taking, and offering.[^wikipedia]" },
+            { "label": "EARNED, NOT INHERITED", "text": "Commissioned only after a man proves himself through work, courage, or accomplishment." },
+            { "label": "INDIVIDUAL DESTINY", "text": "Linked to chi — one's personal god — and the Igbo philosophy that one creates one's own fortune.[^britannica-igbo]" }
+          ],
+          "image": {
+            "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/33/Ikenga_bigger_one.jpg/1280px-Ikenga_bigger_one.jpg",
+            "sourceUrl": "https://commons.wikimedia.org/wiki/File:Ikenga_bigger_one.jpg",
+            "caption": "Ikenga figure, contemporary carving",
+            "credit": "Chiziqa · CC BY-SA 4.0 · Wikimedia Commons"
+          },
+          "marginalia": "Every Ikenga is unique to its owner. The form is conventional; the spirit is personal."
+        },
+        {
+          "id": "etymology",
+          "number": "02",
+          "eyebrow": "ETYMOLOGY",
+          "title": "The Word Behind the Figure",
+          "lede": "Ọkpa aka — the right hand.[^wikipedia] In Igbo thought, the right hand is the hand of action: the instrument of work, the maker of one's own fortune.[^britannica] Ikenga is, above all, a tribute to what that hand has accomplished.",
+          "etymology": [
+            { "word": "Ike", "gloss": "power · strength · force", "sub": "The root of vitality and capacity — the energy that drives action." },
+            { "word": "Nga · Ga", "gloss": "place · location", "sub": "A locus, a seat — the dwelling-place where strength resides." }
+          ],
+          "equation": "the place of strength",
+          "marginalia": "See also: chi nke madu — one's personal god, the partner of the right hand."
+        },
+        {
+          "id": "symbolism",
+          "number": "03",
+          "eyebrow": "SYMBOLISM",
+          "title": "Reading the Figure",
+          "lede": "Every carving is a sentence written in form. Three elements carry the meaning — hover or tap each to read.",
+          "annotations": [
+            { "id": "horns", "part": "The Horns", "text": "Borrowed from the ram — a creature that meets force with greater force.[^smarthistory] The horns signal aggression, perseverance, and unshakable will.", "top": "12%" },
+            { "id": "machete", "part": "The Machete (Right Hand)", "text": "Raised in the right hand: the tool of clearing, building, and battle.[^britannica] It is the instrument of self-made achievement.", "top": "42%" },
+            { "id": "trophy", "part": "The Trophy (Left Hand)", "text": "Held in the left hand: a token of victory[^wikipedia] — a defeated foe, an honor, or the fruits of a successful enterprise.", "top": "62%" }
+          ],
+          "image": {
+            "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/29/Ikenga_figure%2C_British_Museum.jpg/1280px-Ikenga_figure%2C_British_Museum.jpg",
+            "sourceUrl": "https://commons.wikimedia.org/wiki/File:Ikenga_figure,_British_Museum.jpg",
+            "caption": "Ikenga figure, British Museum collection[^bm-ikenga]",
+            "credit": "14GTR · CC0 · Wikimedia Commons"
+          }
+        },
+        {
+          "id": "forms",
+          "number": "04",
+          "eyebrow": "FORMS",
+          "title": "Three Forms, One Meaning",
+          "lede": "Ikenga figures range from minimal to elaborate, but every form carries the same intent: a personal seat of strength. Tap each name to compare.",
+          "forms": [
+            {
+              "key": "ntupo",
+              "name": "Ntupo",
+              "subtitle": "The Simplest Form",
+              "text": "A small, almost abstract block of wood — sometimes little more than a stub with two horns.[^wikipedia] Affordable, portable, and often a man's first Ikenga.",
+              "image": "https://upload.wikimedia.org/wikipedia/commons/c/c4/Ancestral_Figure_of_Ikenga_1.jpg",
+              "sourceUrl": "https://commons.wikimedia.org/wiki/File:Ancestral_Figure_of_Ikenga_1.jpg",
+              "credit": "King ChristLike · CC BY-SA 4.0"
+            },
+            {
+              "key": "alusi",
+              "name": "Alusi",
+              "subtitle": "The Ritual / Abstract",
+              "text": "A more sculptural form — pillar-like, with stylised horns and geometric carving rather than full human features.[^smarthistory] Emphasises spiritual function over likeness.",
+              "image": "https://upload.wikimedia.org/wikipedia/commons/8/81/Ancestral_Figure_of_Ikenga_3.jpg",
+              "sourceUrl": "https://commons.wikimedia.org/wiki/File:Ancestral_Figure_of_Ikenga_3.jpg",
+              "credit": "King ChristLike · CC BY-SA 4.0"
+            },
+            {
+              "key": "ifulu",
+              "name": "Ifulu",
+              "subtitle": "The Fully Figurative",
+              "text": "The most elaborate type — a fully carved human figure seated or standing, holding a machete and trophy, often richly ornamented.[^britannica] A statement piece for a man of high standing.",
+              "image": "https://upload.wikimedia.org/wikipedia/commons/d/dd/Ancestral_Figure_of_Ikenga_6.jpg",
+              "sourceUrl": "https://commons.wikimedia.org/wiki/File:Ancestral_Figure_of_Ikenga_6.jpg",
+              "credit": "King ChristLike · CC BY-SA 4.0"
+            }
+          ],
+          "marginalia": "Notice how the figure becomes more legible as it becomes more elaborate. The simplest Ntupo is almost a question; the Ifulu is a complete sentence."
+        },
+        {
+          "id": "culture",
+          "number": "05",
+          "eyebrow": "CULTURE",
+          "title": "More Than an Object",
+          "ritual": {
+            "title": "Ritual life",
+            "items": [
+              { "name": "Consecration", "text": "A new Ikenga is brought to life through prayer and sacrifice — often kola nut and palm wine — before it can act on its owner's behalf.[^wikipedia]" },
+              { "name": "Daily address", "text": "The owner speaks to it before ventures: trading journeys, planting, hunts, marriage negotiations.[^smarthistory]" },
+              { "name": "Split at death", "text": "Traditionally, an owner's Ikenga is split or buried with him — its work complete, its strength returning to its source.[^britannica]" }
+            ]
+          },
+          "values": {
+            "title": "Values it carries",
+            "items": [
+              { "name": "Self-reliance", "text": "What you earn with your own hand." },
+              { "name": "Perseverance", "text": "The ram does not retreat." },
+              { "name": "Ambition", "text": "Achievement is honourable, not vulgar." },
+              { "name": "Honor", "text": "Reputation built on real deeds." }
+            ]
+          },
+          "image": {
+            "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/ba/Ikenga_Eze.jpg/1280px-Ikenga_Eze.jpg",
+            "sourceUrl": "https://commons.wikimedia.org/wiki/File:Ikenga_Eze.jpg",
+            "caption": "Ikenga Eze",
+            "credit": "Ogoo Vivy · CC BY-SA 4.0"
+          }
+        },
+        {
+          "id": "legacy",
+          "number": "06",
+          "eyebrow": "LEGACY",
+          "title": "A Figure Still Speaking",
+          "lede": "Carved from a single block of wood, the Ikenga has moved from the obi to the museum — and back into contemporary Igbo imagination as a symbol of identity, enterprise, and self-made strength.",
+          "sites": [
+            { "label": "In museums", "text": "Collections at the British Museum,[^bm-ikenga] the Met,[^met-1][^met-2] the Smithsonian,[^smithsonian] the Indianapolis Museum of Art,[^indianapolis] and Nigeria's own galleries preserve hundreds of Ikenga figures from the 19th and 20th centuries.[^royalhistsoc]" },
+            { "label": "In literature", "text": "Chinua Achebe and other Igbo writers have invoked Ikenga as shorthand for a man's spirit, drive, and standing in his community.[^achebe]" },
+            { "label": "In identity", "text": "Today Ikenga lives on as a name, a brand, a school motto, and a shorthand for Igbo enterprise — strength carried into a new century.[^duke-sacredart]" }
+          ],
+          "image": {
+            "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/af/Ikenga_nri.jpg/1280px-Ikenga_nri.jpg",
+            "sourceUrl": "https://commons.wikimedia.org/wiki/File:Ikenga_nri.jpg",
+            "caption": "Ikenga of Nri",
+            "credit": "Ennydavids · CC BY-SA 4.0"
+          }
+        }
+      ],
+      "bibliography": [
+        { "id": "wikipedia", "title": "Ikenga", "source": "Wikipedia", "url": "https://en.wikipedia.org/wiki/Ikenga", "note": "General overview, etymology, and forms." },
+        { "id": "britannica", "title": "Ikenga", "source": "Encyclopædia Britannica", "url": "https://www.britannica.com/art/ikenga", "note": "Concise definition: \"that part of oneself enabling personal achievement.\"" },
+        { "id": "britannica-igbo", "title": "African art — Igbo", "source": "Encyclopædia Britannica", "url": "https://www.britannica.com/art/African-art/Igbo", "note": "Broader Igbo sculptural tradition and ritual context." },
+        { "id": "smarthistory", "title": "Ikenga (Igbo peoples)", "source": "Smarthistory", "url": "https://smarthistory.org/ikenga/", "note": "Art-historical reading of the form's symbolism and ritual use." },
+        { "id": "bm-ikenga", "title": "Ikenga (E.Af1949,46.192)", "source": "The British Museum", "url": "https://www.britishmuseum.org/collection/object/E_Af1949-46-192", "note": "Three-tier Ikenga: chief, wife, attendants, capped with horns." },
+        { "id": "met-1", "title": "Shrine figure (Ìkéǹgà)", "source": "The Metropolitan Museum of Art", "url": "https://www.metmuseum.org/art/collection/search/311087", "note": "Met collection entry, accession 1979.206.96." },
+        { "id": "met-2", "title": "Shrine Figure (Ikenga)", "source": "The Metropolitan Museum of Art", "url": "https://www.metmuseum.org/art/collection/search/314139", "note": "A second Met figure for comparison." },
+        { "id": "smithsonian", "title": "Shrine figure", "source": "Smithsonian National Museum of African Art", "url": "https://africa.si.edu/collection/object/nmafa_76-23-5", "note": "NMAfA accession 76-23-5." },
+        { "id": "indianapolis", "title": "Ikenga figure", "source": "Indianapolis Museum of Art at Newfields", "url": "https://collections.discovernewfields.org/art/artwork/80788", "note": "Catalogue entry with provenance notes." },
+        { "id": "duke-sacredart", "title": "Ikenga Statue (Igbo)", "source": "The Sacred Arts of the Black Atlantic · Duke University", "url": "https://sacredart.caaar.duke.edu/artifacts/ikenga-statue-igbo/", "note": "Pedagogical essay on Ikenga in the diasporic context." },
+        { "id": "royalhistsoc", "title": "Objects of Sovereignty: Thinking through Restitution", "source": "Historical Transactions · Royal Historical Society", "url": "https://blog.royalhistsoc.org/2022/02/21/objects-of-sovereignty-thinking-through-restitution/", "note": "On Ikenga figures, colonial collecting, and restitution." },
+        { "id": "achebe", "title": "Things Fall Apart", "source": "Chinua Achebe · Wikipedia entry on the novel", "url": "https://en.wikipedia.org/wiki/Things_Fall_Apart", "note": "Okonkwo as the literary embodiment of Igbo self-made strength." }
+      ],
+      "colophon": {
+        "left": "Photographs public-domain or CC-licensed via Wikimedia Commons; click any image credit to visit the source page.",
+        "right": "This is itself an Ikenga artifact. Opened inside any browser it reads as a field journal; opened inside the Ikenga shell it surfaces an interactive layer — comment on any element to chat with the AI, and the AI edits the artifact in place."
+      }
+    }
+  }
+  </script>
+
+  <!-- Editorial typography — typewriter display, handwritten margin, serif body -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;500&family=Source+Serif+4:ital,opsz,wght@0,8..60,300;0,8..60,400;0,8..60,500;0,8..60,600;0,8..60,700;1,8..60,400&family=Special+Elite&display=swap" />
+
+  <!-- Tailwind for layout primitives only — typography is hand-tuned below -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- React UMD -->
+  <script crossorigin src="https://cdn.jsdelivr.net/npm/react@18.3.1/umd/react.production.min.js"></script>
+  <script crossorigin src="https://cdn.jsdelivr.net/npm/react-dom@18.3.1/umd/react-dom.production.min.js"></script>
+
+  <!-- Babel-standalone for in-browser JSX -->
+  <script src="https://cdn.jsdelivr.net/npm/@babel/standalone@7.25.6/babel.min.js"></script>
+
+  <style>
+    :root {
+      --paper:    #F1E8D0;
+      --paper-2:  #E9DEBE;
+      --ink:      #2A2520;
+      --ink-soft: #5C5248;
+      --brick:    #A0421F;
+      --brick-2:  #C75A30;
+      --rule:     rgba(42, 37, 32, 0.18);
+      --grid:     rgba(42, 37, 32, 0.05);
+    }
+    html, body { background: var(--paper); color: var(--ink); }
+    body {
+      font-family: 'Source Serif 4', Georgia, 'Times New Roman', serif;
+      font-feature-settings: 'kern', 'liga', 'onum';
+      font-optical-sizing: auto;
+      letter-spacing: 0.005em;
+      text-rendering: optimizeLegibility;
+      -webkit-font-smoothing: antialiased;
+      background-image:
+        linear-gradient(var(--grid) 1px, transparent 1px),
+        linear-gradient(90deg, var(--grid) 1px, transparent 1px);
+      background-size: 32px 32px, 32px 32px;
+      background-position: -1px -1px;
+    }
+    /* Paper noise — subtle SVG fibre texture, CSP-friendly inline data URL */
+    body::before {
+      content: '';
+      position: fixed; inset: 0; pointer-events: none; z-index: 0;
+      opacity: 0.18;
+      background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='240' height='240'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0.32  0 0 0 0 0.27  0 0 0 0 0.18  0 0 0 0.4 0'/></filter><rect width='240' height='240' filter='url(%23n)'/></svg>");
+      mix-blend-mode: multiply;
+    }
+    .display    { font-family: 'Special Elite', 'Courier New', monospace; letter-spacing: 0.02em; }
+    .hand       { font-family: 'Caveat', 'Comic Sans MS', cursive; letter-spacing: 0; }
+    .mono       { font-family: ui-monospace, 'IBM Plex Mono', 'Menlo', monospace; }
+    .eyebrow    { font-family: 'Special Elite', 'Courier New', monospace; letter-spacing: 0.22em; font-size: 11px; text-transform: uppercase; color: var(--brick); }
+    .number     { font-family: 'Special Elite', monospace; color: var(--brick); letter-spacing: 0.08em; }
+    .rule       { border-color: var(--rule); }
+    .ink        { color: var(--ink); }
+    .ink-soft   { color: var(--ink-soft); }
+    .brick      { color: var(--brick); }
+    .bg-paper-2 { background: var(--paper-2); }
+    .border-rule{ border-color: var(--rule); }
+
+    /* Dotted rule used as section divider — pencil dashed feel */
+    .dotted-rule {
+      height: 1px;
+      background-image: linear-gradient(to right, var(--rule) 50%, transparent 50%);
+      background-size: 8px 1px;
+      background-repeat: repeat-x;
+    }
+
+    /* Drop cap on the first paragraph of each section */
+    .lede::first-letter {
+      font-family: 'Special Elite', monospace;
+      float: left;
+      font-size: 4.4rem;
+      line-height: 0.9;
+      padding: 0.4rem 0.6rem 0.2rem 0;
+      color: var(--brick);
+    }
+
+    /* Marginalia: brick-red handwritten gloss, slight rotation, dotted leader */
+    .margin-note {
+      font-family: 'Caveat', cursive;
+      color: var(--brick);
+      font-size: 1.15rem;
+      line-height: 1.25;
+      transform: rotate(-1.2deg);
+    }
+    .margin-arrow::before {
+      content: '↳ ';
+      font-family: 'Special Elite', monospace;
+      margin-right: 0.15em;
+    }
+
+    /* Image plate: torn-edge feel with a thin double border */
+    .plate {
+      background: var(--paper-2);
+      box-shadow: 0 1px 0 rgba(42,37,32,0.06), inset 0 0 0 1px rgba(42,37,32,0.1);
+      padding: 8px;
+    }
+    .plate img { display: block; width: 100%; height: auto; }
+
+    /* Annotation pin used in the Symbolism section */
+    .pin {
+      width: 22px; height: 22px;
+      border: 1.5px solid var(--brick);
+      border-radius: 9999px;
+      background: rgba(241, 232, 208, 0.95);
+      color: var(--brick);
+      display: inline-flex; align-items: center; justify-content: center;
+      font-family: 'Special Elite', monospace;
+      font-size: 11px;
+    }
+
+    /* Subtle "stamp" effect for chapter index */
+    .stamp {
+      border: 1px solid var(--rule);
+      padding: 4px 10px;
+      letter-spacing: 0.16em;
+    }
+
+    /* Smooth-scroll for anchor links */
+    html { scroll-behavior: smooth; }
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+    }
+
+    /* Tighten the bridge banner so it doesn't fight the editorial frame */
+    .bridge-banner {
+      font-family: 'Special Elite', monospace;
+      letter-spacing: 0.06em;
+      font-size: 11px;
+    }
+  </style>
+
+  <!--
+    Bridge polyfill. Same shape as the other references — kept inline until
+    @ikenga/artifact ships on a CDN. The fetch fails (cms.royalti.io is not
+    a real endpoint) and falls back to mock-data; that's the designed path.
+  -->
+  <script>
+  window.__ikenga_bridge_polyfill__ = (function () {
+    var manifest = JSON.parse(document.getElementById('ikenga-manifest').textContent);
+    var mock = JSON.parse(document.getElementById('ikenga-mock-data').textContent);
+    var hostKind = window.__ikenga_host__ ? 'ikenga' : 'browser';
+    var cache = {}, subs = {}, usedFallback = {};
+
+    function resolve(name) {
+      var def = manifest.dataSources[name];
+      if (def && def.type === 'fetch') {
+        return fetch(def.url).then(function (r) {
+          if (!r.ok) throw new Error('http ' + r.status);
+          return r.json();
+        }).then(function (d) { usedFallback[name] = false; return d; })
+          .catch(function () { usedFallback[name] = true; return mock[name]; });
+      }
+      usedFallback[name] = true;
+      return Promise.resolve(mock[name]);
+    }
+
+    return {
+      init: function () {
+        var keys = Object.keys(manifest.dataSources);
+        return Promise.all(keys.map(function (k) {
+          return resolve(k).then(function (v) { cache[k] = v; });
+        })).then(function () {
+          return {
+            host: {
+              kind: hostKind,
+              user: null,
+              usedFallback: function (n) { return !!usedFallback[n]; },
+              anyFallback: function () { return Object.keys(usedFallback).some(function (k) { return usedFallback[k]; }); },
+            },
+            source: function (name) {
+              return {
+                get: function () { return cache[name]; },
+                subscribe: function (fn) {
+                  if (!subs[name]) subs[name] = [];
+                  subs[name].push(fn);
+                  return function () { subs[name] = subs[name].filter(function (f) { return f !== fn; }); };
+                },
+                refresh: function () {
+                  return resolve(name).then(function (v) {
+                    cache[name] = v;
+                    (subs[name] || []).forEach(function (fn) { fn(v); });
+                  });
+                },
+              };
+            },
+            state: {
+              get: function (k) {
+                try { return JSON.parse(localStorage.getItem('ikenga:' + manifest.id + ':' + k)); }
+                catch (e) { return null; }
+              },
+              set: function (k, v) { localStorage.setItem('ikenga:' + manifest.id + ':' + k, JSON.stringify(v)); },
+              subscribe: function () { return function () {}; },
+            },
+            notes: { send: function (t, o) { console.log('[ikenga.notes]', t, o || {}); } },
+            pin: function () {},
+          };
+        });
+      }
+    };
+  })();
+  </script>
+</head>
+
+<body class="antialiased">
+  <div id="root" class="relative z-10">
+    <div class="max-w-2xl mx-auto p-8 text-sm ink-soft">Initializing…</div>
+  </div>
+
+  <script type="text/babel" data-presets="env,react">
+    (function () {
+      const { useState, useEffect, useRef } = React;
+
+      function useSource(art, name) {
+        const [v, setV] = useState(() => art.source(name).get());
+        useEffect(() => art.source(name).subscribe(setV), [art, name]);
+        return v;
+      }
+
+      // ── small components ───────────────────────────────────────
+
+      // Renders a string with `[^id]` markers as superscript citation links
+      // that jump to the bibliography. Numbers are derived from biblio order.
+      const BiblioCtx = React.createContext([]);
+      function Cited({ children }) {
+        const biblio = React.useContext(BiblioCtx);
+        const text = typeof children === 'string' ? children : '';
+        if (!text || !biblio.length) return <>{children}</>;
+        const re = /\[\^([a-z0-9-]+)\]/g;
+        const out = [];
+        let last = 0, m, key = 0;
+        while ((m = re.exec(text)) !== null) {
+          if (m.index > last) out.push(text.slice(last, m.index));
+          const id = m[1];
+          const idx = biblio.findIndex((b) => b.id === id);
+          if (idx >= 0) {
+            const n = idx + 1;
+            out.push(
+              <sup key={key++} className="ml-0.5">
+                <a
+                  href={`#bib-${id}`}
+                  className="brick mono text-[10px] no-underline hover:underline"
+                  title={biblio[idx].source}
+                >[{n}]</a>
+              </sup>
+            );
+          }
+          last = m.index + m[0].length;
+        }
+        if (last < text.length) out.push(text.slice(last));
+        return <>{out}</>;
+      }
+
+      function DottedRule({ className = '' }) {
+        return <div className={`dotted-rule my-6 ${className}`} />;
+      }
+
+      function Marginalia({ children, className = '' }) {
+        return (
+          <aside className={`margin-note margin-arrow ${className}`}>
+            {children}
+          </aside>
+        );
+      }
+
+      function Plate({ src, alt, caption, credit, sourceUrl, className = '' }) {
+        const [open, setOpen] = useState(false);
+        return (
+          <>
+            <figure className={`plate ${className}`}>
+              <button
+                onClick={() => setOpen(true)}
+                className="block w-full focus:outline-none"
+                aria-label={`Enlarge ${alt}`}
+              >
+                <img src={src} alt={alt} loading="lazy" />
+              </button>
+              <figcaption className="mt-3 px-1 pb-1 flex items-baseline justify-between gap-4 text-xs">
+                <span className="display ink"><Cited>{caption}</Cited></span>
+                {sourceUrl ? (
+                  <a
+                    href={sourceUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="mono ink-soft italic no-underline hover:text-[var(--brick)] hover:underline"
+                    title="View source on Wikimedia Commons"
+                  >{credit} ↗</a>
+                ) : (
+                  <span className="mono ink-soft italic">{credit}</span>
+                )}
+              </figcaption>
+            </figure>
+            {open && (
+              <div
+                onClick={() => setOpen(false)}
+                className="fixed inset-0 z-50 bg-black/70 flex items-center justify-center p-6 cursor-zoom-out"
+                role="dialog"
+                aria-label={alt}
+              >
+                <img src={src} alt={alt} className="max-h-[90vh] max-w-[90vw] shadow-2xl" />
+              </div>
+            )}
+          </>
+        );
+      }
+
+      function SectionHeader({ number, eyebrow, title }) {
+        return (
+          <header className="mb-8">
+            <div className="flex items-baseline gap-4 mb-3">
+              <span className="number text-2xl">{number}</span>
+              <span className="eyebrow">{eyebrow}</span>
+            </div>
+            <h2 className="display text-3xl md:text-4xl font-normal ink leading-tight">
+              {title}
+            </h2>
+          </header>
+        );
+      }
+
+      // ── section bodies ─────────────────────────────────────────
+
+      function IntroSection({ s }) {
+        return (
+          <section id={s.id} className="grid md:grid-cols-12 gap-x-10 gap-y-6 scroll-mt-24">
+            <div className="md:col-span-7 md:col-start-1">
+              <SectionHeader number={s.number} eyebrow={s.eyebrow} title={s.title} />
+              <p className="lede text-lg leading-relaxed"><Cited>{s.lede}</Cited></p>
+              <DottedRule />
+              <ol className="space-y-5">
+                {s.facets.map((f, i) => (
+                  <li key={f.label} className="flex gap-4">
+                    <span className="number mt-1.5 text-sm shrink-0 w-6">{String(i + 1).padStart(2, '0')}</span>
+                    <div>
+                      <div className="eyebrow mb-1.5">{f.label}</div>
+                      <p className="text-base leading-relaxed"><Cited>{f.text}</Cited></p>
+                    </div>
+                  </li>
+                ))}
+              </ol>
+            </div>
+            <div className="md:col-span-4 md:col-start-9 md:row-start-1 space-y-4">
+              <Plate
+                src={s.image.url}
+                alt={s.image.caption}
+                caption={s.image.caption}
+                credit={s.image.credit}
+                sourceUrl={s.image.sourceUrl}
+              />
+              <Marginalia>{s.marginalia}</Marginalia>
+            </div>
+          </section>
+        );
+      }
+
+      function EtymologySection({ s }) {
+        return (
+          <section id={s.id} className="scroll-mt-24">
+            <SectionHeader number={s.number} eyebrow={s.eyebrow} title={s.title} />
+            <div className="grid md:grid-cols-12 gap-x-10 gap-y-8 items-start">
+              <div className="md:col-span-7">
+                <div className="border border-rule bg-paper-2/40 p-6 md:p-8">
+                  <div className="grid grid-cols-2 gap-6 items-baseline">
+                    {s.etymology.map((e, i) => (
+                      <div key={e.word}>
+                        <div className="display text-3xl ink mb-1">{e.word}</div>
+                        <div className="eyebrow mb-3">{e.gloss}</div>
+                        <p className="text-sm ink-soft leading-relaxed">{e.sub}</p>
+                      </div>
+                    ))}
+                  </div>
+                  <div className="dotted-rule my-6" />
+                  <div className="text-center">
+                    <span className="display ink-soft text-sm mr-3">=</span>
+                    <span className="display text-xl ink">"{s.equation}"</span>
+                  </div>
+                </div>
+                <p className="lede text-lg leading-relaxed mt-8"><Cited>{s.lede}</Cited></p>
+              </div>
+              <div className="md:col-span-4 md:col-start-9">
+                <Marginalia>{s.marginalia}</Marginalia>
+              </div>
+            </div>
+          </section>
+        );
+      }
+
+      function SymbolismSection({ s }) {
+        const [active, setActive] = useState(s.annotations[0].id);
+        const current = s.annotations.find((a) => a.id === active) || s.annotations[0];
+        return (
+          <section id={s.id} className="scroll-mt-24">
+            <SectionHeader number={s.number} eyebrow={s.eyebrow} title={s.title} />
+            <p className="lede text-lg leading-relaxed mb-10 max-w-3xl"><Cited>{s.lede}</Cited></p>
+            <div className="grid md:grid-cols-12 gap-x-10 gap-y-6 items-start">
+              <div className="md:col-span-6 relative">
+                <Plate
+                  src={s.image.url}
+                  alt={s.image.caption}
+                  caption={s.image.caption}
+                  credit={s.image.credit}
+                  sourceUrl={s.image.sourceUrl}
+                />
+                {s.annotations.map((a, i) => (
+                  <button
+                    key={a.id}
+                    onClick={() => setActive(a.id)}
+                    className="absolute left-2 transition-transform hover:scale-110"
+                    style={{ top: a.top }}
+                    aria-label={a.part}
+                  >
+                    <span className={`pin ${active === a.id ? 'bg-[var(--brick)] text-[var(--paper)]' : ''}`}>{i + 1}</span>
+                  </button>
+                ))}
+              </div>
+              <div className="md:col-span-6 space-y-4">
+                {s.annotations.map((a, i) => (
+                  <button
+                    key={a.id}
+                    onClick={() => setActive(a.id)}
+                    className={`block w-full text-left border-l-2 pl-5 py-2 transition-colors ${
+                      active === a.id ? 'border-[var(--brick)]' : 'border-rule hover:border-[var(--brick-2)]'
+                    }`}
+                  >
+                    <div className="flex items-baseline gap-3 mb-1">
+                      <span className="pin" style={{ width: 18, height: 18, fontSize: 9 }}>{i + 1}</span>
+                      <h3 className="display text-lg ink">{a.part}</h3>
+                    </div>
+                    <p className={`text-sm leading-relaxed ${active === a.id ? 'ink' : 'ink-soft'}`}><Cited>{a.text}</Cited></p>
+                  </button>
+                ))}
+              </div>
+            </div>
+          </section>
+        );
+      }
+
+      function FormsSection({ s }) {
+        const [active, setActive] = useState(s.forms[0].key);
+        const current = s.forms.find((f) => f.key === active) || s.forms[0];
+        return (
+          <section id={s.id} className="scroll-mt-24">
+            <SectionHeader number={s.number} eyebrow={s.eyebrow} title={s.title} />
+            <p className="lede text-lg leading-relaxed max-w-3xl mb-8"><Cited>{s.lede}</Cited></p>
+
+            {/* Tabs */}
+            <div className="flex gap-0 border-b border-rule mb-8">
+              {s.forms.map((f) => (
+                <button
+                  key={f.key}
+                  onClick={() => setActive(f.key)}
+                  className={`px-5 py-3 -mb-px border-b-2 transition-colors ${
+                    active === f.key ? 'border-[var(--brick)] text-[var(--ink)]' : 'border-transparent ink-soft hover:text-[var(--ink)]'
+                  }`}
+                >
+                  <div className="display text-base mb-0.5">{f.name}</div>
+                  <div className="text-[10px] uppercase tracking-widest ink-soft">{f.subtitle}</div>
+                </button>
+              ))}
+            </div>
+
+            <div className="grid md:grid-cols-12 gap-x-10 gap-y-6 items-start">
+              <div className="md:col-span-5">
+                <Plate
+                  src={current.image}
+                  alt={current.name}
+                  caption={`${current.name} · ${current.subtitle}`}
+                  credit={current.credit}
+                  sourceUrl={current.sourceUrl}
+                />
+              </div>
+              <div className="md:col-span-6 md:col-start-7">
+                <div className="number text-2xl mb-2">{s.forms.findIndex(f => f.key === active) + 1}/3</div>
+                <h3 className="display text-2xl ink mb-1">{current.name}</h3>
+                <div className="eyebrow mb-5">{current.subtitle}</div>
+                <p className="text-base leading-relaxed"><Cited>{current.text}</Cited></p>
+                <Marginalia className="mt-6">{s.marginalia}</Marginalia>
+              </div>
+            </div>
+          </section>
+        );
+      }
+
+      function CultureSection({ s }) {
+        return (
+          <section id={s.id} className="scroll-mt-24">
+            <SectionHeader number={s.number} eyebrow={s.eyebrow} title={s.title} />
+            <div className="grid md:grid-cols-12 gap-x-10 gap-y-10">
+              <div className="md:col-span-5">
+                <Plate
+                  src={s.image.url}
+                  alt={s.image.caption}
+                  caption={s.image.caption}
+                  credit={s.image.credit}
+                  sourceUrl={s.image.sourceUrl}
+                />
+              </div>
+              <div className="md:col-span-7 space-y-10">
+                <div>
+                  <h3 className="display text-lg ink mb-1">{s.ritual.title}</h3>
+                  <div className="dotted-rule mb-4" />
+                  <dl className="space-y-4">
+                    {s.ritual.items.map((it) => (
+                      <div key={it.name} className="grid grid-cols-12 gap-4">
+                        <dt className="col-span-4 eyebrow pt-1">{it.name}</dt>
+                        <dd className="col-span-8 text-sm leading-relaxed"><Cited>{it.text}</Cited></dd>
+                      </div>
+                    ))}
+                  </dl>
+                </div>
+                <div>
+                  <h3 className="display text-lg ink mb-1">{s.values.title}</h3>
+                  <div className="dotted-rule mb-4" />
+                  <ul className="grid grid-cols-2 gap-x-6 gap-y-4">
+                    {s.values.items.map((v) => (
+                      <li key={v.name}>
+                        <div className="display text-base ink">{v.name}</div>
+                        <div className="text-sm ink-soft leading-snug">{v.text}</div>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </section>
+        );
+      }
+
+      function LegacySection({ s }) {
+        return (
+          <section id={s.id} className="scroll-mt-24">
+            <SectionHeader number={s.number} eyebrow={s.eyebrow} title={s.title} />
+            <div className="grid md:grid-cols-12 gap-x-10 gap-y-10 items-start">
+              <div className="md:col-span-7">
+                <p className="lede text-lg leading-relaxed"><Cited>{s.lede}</Cited></p>
+                <DottedRule />
+                <div className="space-y-6">
+                  {s.sites.map((site, i) => (
+                    <div key={site.label} className="grid grid-cols-12 gap-4">
+                      <div className="col-span-3">
+                        <span className="number text-sm">{String(i + 1).padStart(2, '0')}</span>
+                        <div className="eyebrow mt-1">{site.label}</div>
+                      </div>
+                      <p className="col-span-9 text-base leading-relaxed"><Cited>{site.text}</Cited></p>
+                    </div>
+                  ))}
+                </div>
+              </div>
+              <div className="md:col-span-4 md:col-start-9">
+                <Plate
+                  src={s.image.url}
+                  alt={s.image.caption}
+                  caption={s.image.caption}
+                  credit={s.image.credit}
+                  sourceUrl={s.image.sourceUrl}
+                />
+              </div>
+            </div>
+          </section>
+        );
+      }
+
+      // ── Bibliography (Further Reading) ────────────────────────
+
+      function Bibliography({ biblio }) {
+        if (!biblio || !biblio.length) return null;
+        return (
+          <section id="bibliography" className="scroll-mt-24 mt-24">
+            <header className="mb-8">
+              <div className="flex items-baseline gap-4 mb-3">
+                <span className="number text-2xl">07</span>
+                <span className="eyebrow">FURTHER READING</span>
+              </div>
+              <h2 className="display text-3xl md:text-4xl font-normal ink leading-tight">
+                Sources &amp; citations
+              </h2>
+              <p className="mt-3 ink-soft text-sm leading-relaxed max-w-2xl">
+                Every numbered marker in the body links here. Museum entries point at the catalogued figure; encyclopaedic sources give the broader frame.
+              </p>
+            </header>
+            <ol className="space-y-3">
+              {biblio.map((b, i) => (
+                <li
+                  key={b.id}
+                  id={`bib-${b.id}`}
+                  className="grid grid-cols-12 gap-4 py-3 border-t border-rule"
+                >
+                  <div className="col-span-1 number text-sm pt-0.5">[{i + 1}]</div>
+                  <div className="col-span-11">
+                    <a
+                      href={b.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="display text-base ink hover:text-[var(--brick)]"
+                    >{b.title} ↗</a>
+                    <div className="eyebrow mt-0.5">{b.source}</div>
+                    {b.note && (
+                      <p className="text-sm ink-soft mt-1 leading-relaxed">{b.note}</p>
+                    )}
+                  </div>
+                </li>
+              ))}
+            </ol>
+          </section>
+        );
+      }
+
+      const SECTION_COMPONENTS = {
+        intro: IntroSection,
+        etymology: EtymologySection,
+        symbolism: SymbolismSection,
+        forms: FormsSection,
+        culture: CultureSection,
+        legacy: LegacySection,
+      };
+
+      // ── chapter index (sticky left rail on desktop) ───────────
+
+      function ChapterRail({ sections, hasBiblio }) {
+        const allIds = hasBiblio ? [...sections.map((s) => s.id), 'bibliography'] : sections.map((s) => s.id);
+        const [active, setActive] = useState(allIds[0]);
+        useEffect(() => {
+          if (!('IntersectionObserver' in window)) return;
+          const els = allIds.map((id) => document.getElementById(id)).filter(Boolean);
+          const obs = new IntersectionObserver(
+            (entries) => {
+              entries.forEach((e) => {
+                if (e.isIntersecting) setActive(e.target.id);
+              });
+            },
+            { rootMargin: '-30% 0px -55% 0px', threshold: 0.01 }
+          );
+          els.forEach((el) => obs.observe(el));
+          return () => obs.disconnect();
+        }, [sections, hasBiblio]);
+
+        return (
+          <nav
+            aria-label="Chapter index"
+            className="hidden lg:flex flex-col gap-2 text-[11px] ink-soft sticky top-12"
+          >
+            <div className="eyebrow mb-2">Field index</div>
+            {sections.map((s) => (
+              <a
+                key={s.id}
+                href={`#${s.id}`}
+                className={`flex items-baseline gap-3 py-1 transition-colors ${
+                  active === s.id ? 'ink' : 'hover:text-[var(--ink)]'
+                }`}
+              >
+                <span className="number text-xs">{s.number}</span>
+                <span className="display">{s.title}</span>
+                {active === s.id && <span className="ml-auto brick">·</span>}
+              </a>
+            ))}
+            {hasBiblio && (
+              <a
+                href="#bibliography"
+                className={`flex items-baseline gap-3 py-1 transition-colors ${
+                  active === 'bibliography' ? 'ink' : 'hover:text-[var(--ink)]'
+                }`}
+              >
+                <span className="number text-xs">07</span>
+                <span className="display">Sources</span>
+                {active === 'bibliography' && <span className="ml-auto brick">·</span>}
+              </a>
+            )}
+          </nav>
+        );
+      }
+
+      // ── App ───────────────────────────────────────────────────
+
+      function App({ art }) {
+        const content = useSource(art, 'content');
+        const fallback = art.host.usedFallback('content');
+        const sections = content?.sections || [];
+        const meta = content?.meta || {};
+        const colophon = content?.colophon || {};
+        const biblio = content?.bibliography || [];
+
+        return (
+          <BiblioCtx.Provider value={biblio}>
+          <div className="min-h-screen">
+            {fallback && (
+              <div className="bridge-banner sticky top-0 z-40 border-b border-rule bg-[var(--paper-2)] px-6 py-2 ink-soft flex items-center gap-3">
+                <span className="brick">●</span>
+                <span>Standalone preview — open in the Ikenga shell to comment + edit via AI.</span>
+                <span className="ml-auto ink-soft">host: <span className="mono">{art.host.kind}</span></span>
+              </div>
+            )}
+
+            {/* Masthead */}
+            <header className="border-b border-rule">
+              <div className="max-w-6xl mx-auto px-6 lg:px-12 pt-16 pb-10 grid grid-cols-12 gap-x-10">
+                <div className="col-span-12 lg:col-span-9 lg:col-start-2">
+                  <div className="flex items-baseline justify-between mb-10">
+                    <span className="eyebrow">{meta.eyebrow}</span>
+                    <span className="eyebrow">{meta.dateline}</span>
+                  </div>
+                  <h1 className="display text-[clamp(3rem,8vw,6rem)] leading-[0.95] mb-4">
+                    {meta.title}
+                  </h1>
+                  <p className="text-xl md:text-2xl ink-soft max-w-3xl italic leading-snug">
+                    {meta.subtitle}
+                  </p>
+                  <div className="dotted-rule my-8" />
+                  <div className="flex items-baseline justify-between text-xs">
+                    <span className="display ink">{meta.byline}</span>
+                    <span className="hand brick text-base" style={{ transform: 'rotate(-2deg)', display: 'inline-block' }}>
+                      ↳ {meta.kicker}
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </header>
+
+            {/* Body */}
+            <main className="max-w-6xl mx-auto px-6 lg:px-12 py-16 grid grid-cols-12 gap-x-10">
+              <div className="hidden lg:block lg:col-span-2">
+                <ChapterRail sections={sections} hasBiblio={biblio.length > 0} />
+              </div>
+              <div className="col-span-12 lg:col-span-9 lg:col-start-4 space-y-24">
+                {sections.map((s, i) => {
+                  const Cmp = SECTION_COMPONENTS[s.id] || IntroSection;
+                  return (
+                    <React.Fragment key={s.id}>
+                      <Cmp s={s} />
+                      {i < sections.length - 1 && <div className="dotted-rule my-2" />}
+                    </React.Fragment>
+                  );
+                })}
+                {biblio.length > 0 && (
+                  <>
+                    <div className="dotted-rule my-2" />
+                    <Bibliography biblio={biblio} />
+                  </>
+                )}
+              </div>
+            </main>
+
+            {/* Colophon */}
+            <footer className="border-t border-rule mt-12">
+              <div className="max-w-6xl mx-auto px-6 lg:px-12 py-12 grid md:grid-cols-2 gap-8 text-xs ink-soft">
+                <div>
+                  <div className="eyebrow mb-2">Colophon</div>
+                  <p className="leading-relaxed">{colophon.left}</p>
+                </div>
+                <div>
+                  <div className="eyebrow mb-2">About this artifact</div>
+                  <p className="leading-relaxed">{colophon.right}</p>
+                </div>
+              </div>
+              <div className="border-t border-rule">
+                <div className="max-w-6xl mx-auto px-6 lg:px-12 py-4 flex items-baseline justify-between text-[11px] ink-soft">
+                  <span className="display">Ikenga artifact · v0.1 · ikenga-symbol</span>
+                  <span className="mono">single-file HTML · {Math.round((document.documentElement.outerHTML.length || 0) / 1024)} KB</span>
+                </div>
+              </div>
+            </footer>
+          </div>
+          </BiblioCtx.Provider>
+        );
+      }
+
+      window.__ikenga_bridge_polyfill__.init().then(function (art) {
+        const root = ReactDOM.createRoot(document.getElementById('root'));
+        root.render(<App art={art} />);
+      }).catch(function (err) {
+        document.getElementById('root').innerHTML =
+          '<pre style="padding:2rem;color:#b91c1c;font-family:ui-monospace,monospace;white-space:pre-wrap">'
+          + 'Init failed: ' + (err && err.message ? err.message : String(err))
+          + '</pre>';
+        console.error('[ikenga] init failed', err);
+      });
+    })();
+  </script>
+</body>
+</html>
