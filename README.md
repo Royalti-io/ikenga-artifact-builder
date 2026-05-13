@@ -4,7 +4,7 @@ A Claude Code skill that teaches the agent to author **single-file HTML
 artifacts** — dashboards, views, comparisons, mockups — that:
 
 - Render standalone in any browser (claude.ai's artifact viewer included).
-- Light up with live data when opened inside the [Ikenga](https://ikenga.ai) shell.
+- Light up with live data when opened inside the [Ikenga](https://ikenga.dev) shell.
 - Are easy to share, review, paste into chat, and iterate on.
 
 Replaces `.md` for visual / interactive / data-bearing outputs.

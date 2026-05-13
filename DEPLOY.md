@@ -17,7 +17,7 @@ set this up; pick one.
    - **Build output directory**: `skills/ikenga-artifact-builder/references`
    - **Root directory**: *(leave at `/`)*
 5. **Save and Deploy**. First deploy takes ~30 seconds.
-6. After it goes green: **Custom domains → Set up a custom domain → `artifacts.ikenga.ai`** (requires `ikenga.ai` to be on Cloudflare DNS).
+6. After it goes green: **Custom domains → Set up a custom domain → `artifacts.ikenga.dev`** (requires `ikenga.dev` to be on Cloudflare DNS).
 
 Every `git push origin main` after that auto-deploys.
 
@@ -60,7 +60,7 @@ URL surface after deploy:
 | `https://ikenga-artifacts.pages.dev/ceo-overview` | rewrites to `ceo-overview.html` |
 | `https://ikenga-artifacts.pages.dev/ikenga-symbol` | rewrites to `ikenga-symbol.html` |
 
-After `artifacts.ikenga.ai` is bound, swap the host — paths are unchanged.
+After `artifacts.ikenga.dev` is bound, swap the host — paths are unchanged.
 
 ## Why not Workers / Workers Sites
 
@@ -72,5 +72,5 @@ that proxies static assets) without buying anything.
 
 `raw.githack.com` works for spin-up but: (a) the URLs aren't ours, (b)
 there's no analytics or 404 handling, (c) the host can rate-limit or
-disappear without notice. Pages gives us `artifacts.ikenga.ai` —
+disappear without notice. Pages gives us `artifacts.ikenga.dev` —
 forever — with auto-deploys from `main`.
