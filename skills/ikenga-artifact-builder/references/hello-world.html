@@ -71,9 +71,14 @@
     package is published. Keeps this example self-contained and testable
     today. Real bridge will mirror this surface; replace this whole block
     with a CDN import once published.
+
+    Guard `|| (function …)`: when the Ikenga shell viewer-server has
+    already injected `@ikenga/artifact`, this whole IIFE is skipped and the
+    artifact uses the host runtime (so `art.host.kind === 'ikenga'`). On
+    claude.ai or plain file://, the inline polyfill installs.
   -->
   <script>
-  window.__ikenga_bridge_polyfill__ = (function () {
+  window.__ikenga_bridge_polyfill__ = window.__ikenga_bridge_polyfill__ || (function () {
     var manifestEl = document.getElementById('ikenga-manifest');
     var mockEl = document.getElementById('ikenga-mock-data');
     var manifest = JSON.parse(manifestEl.textContent);

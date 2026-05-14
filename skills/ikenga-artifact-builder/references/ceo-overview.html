@@ -147,9 +147,10 @@
   <script crossorigin src="https://cdn.jsdelivr.net/npm/react-dom@18.3.1/umd/react-dom.production.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/@babel/standalone@7.25.6/babel.min.js"></script>
 
-  <!-- Bridge polyfill — same as cfo-daily, copied inline for self-containment. -->
+  <!-- Bridge polyfill — same as cfo-daily, copied inline for self-containment.
+       Guarded so the shell-injected runtime (when present) wins. -->
   <script>
-  window.__ikenga_bridge_polyfill__ = (function () {
+  window.__ikenga_bridge_polyfill__ = window.__ikenga_bridge_polyfill__ || (function () {
     var manifest = JSON.parse(document.getElementById('ikenga-manifest').textContent);
     var mock = JSON.parse(document.getElementById('ikenga-mock-data').textContent);
     var hostKind = window.__ikenga_host__ ? 'ikenga' : 'browser';

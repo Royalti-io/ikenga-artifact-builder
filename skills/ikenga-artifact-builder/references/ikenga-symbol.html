@@ -357,7 +357,9 @@
     a real endpoint) and falls back to mock-data; that's the designed path.
   -->
   <script>
-  window.__ikenga_bridge_polyfill__ = (function () {
+  // Guarded so the shell-injected `@ikenga/artifact` runtime (when
+  // present) wins over this inline polyfill.
+  window.__ikenga_bridge_polyfill__ = window.__ikenga_bridge_polyfill__ || (function () {
     var manifest = JSON.parse(document.getElementById('ikenga-manifest').textContent);
     var mock = JSON.parse(document.getElementById('ikenga-mock-data').textContent);
     var hostKind = window.__ikenga_host__ ? 'ikenga' : 'browser';
