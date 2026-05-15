@@ -21,32 +21,49 @@
 
   <!-- ───── manifest ───── -->
   <script type="application/json" id="ikenga-manifest">
-  {
-    "format": "ikenga-artifact",
-    "formatVersion": "0.1",
-    "id": "ikenga-symbol",
-    "name": "Ikenga — The Igbo Symbol of Power",
-    "version": "0.1.0",
-    "description": "Editorial scrollytelling piece on Ikenga the Igbo cultural symbol — the origin of the product line's name.",
-    "license": "Apache-2.0",
-    "icon": { "lucide": "scroll" },
-    "dataSources": {
-      "content": {
-        "type": "fetch",
-        "url": "https://cms.royalti.io/articles/ikenga-symbol",
-        "refresh": { "mode": "manual" }
+{
+  "format": "ikenga-artifact",
+  "formatVersion": "0.1",
+  "id": "ikenga-symbol",
+  "name": "Ikenga — The Igbo Symbol of Power",
+  "version": "0.1.0",
+  "description": "Editorial scrollytelling piece on Ikenga the Igbo cultural symbol — the origin of the product line's name.",
+  "author": "ned",
+  "license": "Apache-2.0",
+  "icon": {
+    "lucide": "scroll"
+  },
+  "dataSources": {
+    "content": {
+      "type": "fetch",
+      "url": "https://cms.royalti.io/articles/ikenga-symbol",
+      "refresh": {
+        "mode": "manual"
       }
-    },
-    "fallback": {
-      "mode": "mock",
-      "dataTag": "ikenga-mock-data",
-      "banner": "Standalone preview — open in the Ikenga shell to comment + edit via AI."
-    },
-    "pin": { "suggested": false },
-    "notes": { "enabled": true },
-    "requires": { "ikenga": ">=0.4", "bridge": "^1.0" }
+    }
+  },
+  "fallback": {
+    "mode": "mock",
+    "dataTag": "ikenga-mock-data",
+    "banner": "Standalone preview — open in the Ikenga shell to comment + edit via AI."
+  },
+  "pin": {
+    "suggested": true,
+    "section": "aa",
+    "label": "ikenga",
+    "icon": {
+      "lucide": "home"
+    }
+  },
+  "notes": {
+    "enabled": true
+  },
+  "requires": {
+    "ikenga": ">=0.4",
+    "bridge": "^1.0"
   }
-  </script>
+}
+</script>
 
   <!-- ───── mock data ───── -->
   <script type="application/json" id="ikenga-mock-data">
