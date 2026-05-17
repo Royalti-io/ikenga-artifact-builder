@@ -12,6 +12,12 @@ description: |
   CLAUDE.md / memory has a rule preferring artifacts over .md for visual
   outputs.
 
+  Has two invocation paths: a **wizard fast-path** (kicked off by the
+  Ikenga shell's artifact-creation wizard with archetype + folder already
+  chosen — build immediately) and a **discover path** (direct invocation
+  from terminal / chat — runs a five-question discovery before building,
+  scoping memory queries to the active Claude project).
+
   DO NOT TRIGGER for: prose, technical writeups, decision docs, READMEs,
   long-form explanations, code reviews — those stay as .md.
 license: Apache-2.0
@@ -24,6 +30,178 @@ You produce **single-file HTML artifacts** that:
 - Render standalone in any browser (claude.ai's artifact viewer included).
 - Light up with live data when opened inside the Ikenga shell.
 - Are easy to share, review, paste into chat, and iterate on.
+
+## Two invocation paths
+
+This skill is invoked two ways. Take a different first turn for each.
+
+### A. Wizard fast-path (kicked off by the Ikenga shell)
+
+The Ikenga artifact-creation wizard spawned this session with a kickoff
+prompt that already names project + archetype + suggested path. The
+prompt has a recognisable shape:
+
+> Build a **one-pager** for project **royalti-io-website**
+> (`/home/.../royalti-io-website`).
+>
+> Suggested path: `one-pagers/q3-recap.html` (under the project root).
+> Use that, or ask me where it should live.
+>
+> Read `.claude/skills/` in this project to know which sub-skills are
+> available, then ask 2-3 clarifying questions about audience, tone,
+> and structure before writing anything. Use the `ikenga-artifact-builder`
+> skill for the build phase.
+
+**Detect the fast-path** by all three of these in the first user message:
+
+1. The phrase `Build a <archetype-label>` where `<archetype-label>` is one
+   of: `dashboard`, `one-pager`, `slide deck`, `social card`, `site`,
+   `scrollytelling experience`, `artifact`.
+2. A `Suggested path:` line with a backtick-quoted `.html` path.
+3. A backtick-quoted absolute project root path on the same line as
+   "for project".
+
+When all three are present, **skip the discover phase entirely**. Treat
+the project root in backticks as the project identifier (the wizard does
+not include a separate `project_id` — it identifies the project by
+root_path). Pull the archetype label and the suggested path verbatim
+from the prompt. Then jump to workflow step 2 ("Sketch data sources"),
+ask at most one short clarifying question about content, and build.
+
+### B. Discover path (direct invocation)
+
+User invoked you directly from a terminal `claude`, an existing chat
+thread, or a skill chain — none of the wizard markers above are present.
+Run the five-question discovery below before building.
+
+## Discover phase (direct path only)
+
+Ask five short questions in order, one at a time. Don't batch. Capture
+the answers — at the end they form the same internal state the wizard's
+kickoff would have produced (project root, archetype slug, target
+folder, suggested path).
+
+### 1. What are you building?
+
+Free text. Listen for words mapping to one of the seven archetypes
+(`dashboard`, `one-pager`, `slides`, `social`, `site`, `scrollytelling`)
+or the explicit "just plain HTML" out. Don't propose anything yet.
+
+### 2. Archetype confirm
+
+Echo back the closest match and let the user redirect. The seven
+canonical archetypes (kept in sync with
+`shell/src/shell/artifact-wizard/archetypes.ts` — that file is the
+source of truth):
+
+| Slug | When |
+|------|------|
+| `dashboard` | KPIs, charts, live data, scan-and-scroll. Default 1440×900. |
+| `one-pager` | Proposal, summary, landing-page-as-doc. Default 1440×900. |
+| `slides` | Sequential reveal, presenter mode. 16:9 (1920×1080). |
+| `social` | Square 1080×1080 social card. Single dense composition. |
+| `site` | Multi-section landing-style site in a single HTML file. |
+| `scrollytelling` | Scroll-driven narrative, pinned sections, progressive reveals. |
+| `blank` | None of these — just plain HTML, bespoke structure. |
+
+Phrase it as: "Sounds like a `one-pager`. Yes / no / something else?"
+Accept "none of these — just plain HTML" as the explicit out (→ `blank`).
+
+### 3. Where does it live?
+
+Default to `<project-root>/<archetype-default-subdir>/<slug>.html` where
+`<project-root>` is the active project's root (from `pwd` in a terminal
+session, or asked of the user in a chat without shell access) and
+`<archetype-default-subdir>` is the archetype's `defaultSubdir` from
+the table:
+
+| Slug | `defaultSubdir` |
+|------|----------------|
+| `dashboard` | `dashboards` |
+| `one-pager` | `one-pagers` |
+| `slides` | `slides` |
+| `social` | `social` |
+| `site` | `sites` |
+| `scrollytelling` | `scrollytelling` |
+| `blank` | `artifacts` |
+
+Show the proposed full path; let the user override either the folder
+or the slug. Validate that the parent dir exists (or will be created
+by the agent on first write) before continuing.
+
+### 4. Project context check + memory hits
+
+Before recommending sub-skills, walk **both** of these directories and
+parse frontmatter (`name`, `description`) from every `*.md`:
+
+- `<project-root>/.claude/skills/*.md` — project-scoped skills.
+- `~/.claude/skills/*.md` — user-global skills (tag these `(global)`
+  in any listing so the user knows the source).
+
+Recommend only skills you actually saw on disk. Don't suggest
+`huashu-design` if it isn't installed in this project.
+
+Then query mempalace for similar past artifacts in **this** Claude
+project. Pass the project root path as the `project_id` filter (see
+"Memory queries" below — this is the same identity the wizard threads
+into its own pre-fetch). Surface up to three hits with one-line
+summaries each; ask whether to riff on any of them.
+
+### 5. Confirm + hand off
+
+Echo the assembled state back:
+
+> Building a **<archetype-label>** at `<full-path>`.
+> Project: `<project-root>`.
+> Sub-skills available here: <comma-separated list>.
+> Memory hits: <three one-liners, or "none">.
+>
+> Ready?
+
+On confirmation, hand off to the build workflow below (the same workflow
+the fast-path enters). The internal state at this point matches what
+`scaffold.ts::startArtifact` would have produced from the wizard.
+
+## Memory queries (both paths)
+
+Mempalace identifies projects by **the absolute project root path**.
+That's the same key the wizard threads (its kickoff prompt names
+`display_name` and `root_path` — root_path is the load-bearing
+identifier; `display_name` is for humans). There's no separate
+shell-internal `project_id` to thread; the path *is* the id.
+
+How to derive it:
+
+- **Wizard fast-path**: extract the backtick-quoted absolute path from
+  the kickoff prompt's "for project … (`<root>`)" line.
+- **Discover path**: ask the user for `pwd` (terminal) or have them
+  paste the project root (chat). The path captured in question 3 above
+  is also a valid source if it already lies under a project root.
+
+The mempalace MCP surface doesn't have a `project_id` filter parameter
+— scoping happens through the entity name itself. Concrete patterns:
+
+- **Knowledge-graph queries** — call
+  `mempalace_kg_query({ entity: <project-root-path> })` and walk the
+  returned triples for facts attached to the project. Triples written
+  this way look like `(<project-root-path>, has_artifact, <slug>)` or
+  `(<project-root-path>, last_archetype, dashboard)`.
+- **Semantic search** — include the project root path (or the project's
+  display name, if known) in the `query` string when calling
+  `mempalace_search`. The room/wing filters are about
+  agent identity, not project identity, so pass them only if you
+  already know which agent diary you want.
+- **Diary writes** — pass `topic: 'project:<project-root-path>'` when
+  calling `mempalace_diary_write`. Future skill runs can find
+  project-scoped diaries by prefix-matching the topic.
+- **Adding facts** — when recording "we built X here today" via
+  `mempalace_kg_add`, use the project root path as `subject`. This is
+  what makes the `kg_query({entity: <path>})` reads above return
+  anything in future sessions.
+
+If you didn't pin down a project root (rare — only happens if the user
+is working outside any project), skip the project scoping rather than
+guess. A global memory hit is better than a wrong-project hit.
 
 ## When to produce an artifact vs a .md file
 
