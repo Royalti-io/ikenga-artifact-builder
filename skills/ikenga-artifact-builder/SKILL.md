@@ -336,6 +336,11 @@ Start from this skeleton. Fill in the marked regions; do not restructure.
       function App({ art }) {
         // const [foo, refreshFoo] = useSource(art, 'foo');
 
+        // Expose state the conversation should react to (selection, step, decisions).
+        // Readable from a terminal via `iyke iframe-state <pane>`. See SKILL.md
+        // "Surfacing state to the shell (`publishState`)" for when to use this.
+        // useEffect(() => { art.publishState && art.publishState('selection', selectedIds); }, [selectedIds]);
+
         return (
           <div className="max-w-2xl mx-auto p-6">
             {art.host.anyFallback() && (
@@ -514,6 +519,10 @@ If any box is unchecked, fix before delivering.
 
 ## Bridge surface (cheat sheet)
 
+> **Stable bridge contract.** The four surfaces named below — `art.publishState`, `art.notes`, `art.pin`, and `art.host` — are the **public bridge contract** pinned by the manifest's `requires.bridge ^1.0`. We won't break their shape inside the `1.x` line; additions are minor-version, removals are major. Composing skills (`groundwork`, downstream artifacts that ride the bridge for `iyke iframe-state` reads, the activity-bar pin handshake) depend on these names + signatures — they're as much a versioned API as `art.source(name).get/subscribe/refresh`.
+>
+> The `art.source` and `art.state` surfaces are equally stable (documented above). Anything not in this section or the source/state surfaces is **internal** — don't rely on it from outside the bridge polyfill.
+
 Inside the IIFE, after `init()`:
 
 ```js
@@ -538,7 +547,71 @@ art.notes.send(text, { selector });
 
 // Pin request — UI handshake to add to activity bar
 art.pin();
+
+// Surface state to the shell so the agent can read it without polling the user.
+// Stored per-pane in the shell's iframe registry; readable from a terminal via
+// `iyke iframe-state <pane>`. Cheap, fire-and-forget — call freely.
+art.publishState(key, value);
 ```
+
+## Surfacing state to the shell (`publishState`)
+
+`art.state.set` persists *inside the iframe* (host-mediated SQLite in Ikenga,
+`localStorage` in plain browsers). It is **not** visible from outside the iframe
+— neither the agent in chat nor `iyke iframe-state <pane>` can see what's
+there. That's correct for sensitive or UI-only state (sort order, selected tab,
+draft note text) but **wrong** for anything you want the conversation to react
+to: decisions, selection, scrub position, multi-select sets, "user marked this
+panel done."
+
+`art.publishState(key, value)` solves this. It sends a fire-and-forget
+`postMessage` to the parent in the shape the shell's iframe registry expects
+(`{ __iyke: true, kind: 'state', payload: { key, value } }`). The shell stores
+the latest value per `(pane, key)` pair; a terminal call to
+`iyke iframe-state <pane>` returns the full state object as JSON, which the
+agent can read on the next turn.
+
+**When to publish**:
+
+- Decision artifacts (this artifact is for the agent + user to converge on
+  something): publish the full decision map whenever it changes.
+- Multi-step artifacts: publish the current step + a per-step status bag.
+- Selection-driven artifacts (tables, kanban, grid): publish the current
+  selection ids so the agent knows what the user is looking at.
+- Anything you'd otherwise re-ask the user about ("which row did you pick?").
+
+**When *not* to publish**:
+
+- Free-text drafts mid-edit (publish on blur or debounce, not on keystroke).
+- Anything sensitive that shouldn't be in the host log surface (PII, secrets).
+- Volatile values that change >10× per second (scroll position, animation
+  frames) — publishState isn't rate-limited, but you'll spam the registry.
+
+**Pattern** (place inside the React component that owns the state):
+
+```jsx
+useEffect(() => {
+  art.publishState && art.publishState('decisions', {
+    decisions: state,
+    resolved: Object.values(state).filter(s => s.resolved).length,
+    updated_at: new Date().toISOString(),
+  });
+}, [state, art]);
+```
+
+**Optional-chain the call** (`art.publishState && art.publishState(...)`) so
+the artifact still runs against older bridge polyfills that don't expose it.
+
+**Verifying from a terminal** (inside Ikenga):
+
+```bash
+iyke state --json | jq '.shell.panes.leaves[].id'    # find the pane id
+iyke iframe-state <pane> --json | jq                  # read published state
+```
+
+Outside Ikenga the call is a no-op (parent === self → no parent to postMessage
+to), so artifacts that use publishState still render fine in plain browsers
+and claude.ai. No environment guard needed.
 
 ## Worked examples
 

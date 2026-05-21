@@ -138,6 +138,17 @@
           },
           notes: { send: function (text, opts) { console.log('[ikenga.notes]', text, opts || {}); } },
           pin: function () { console.log('[ikenga.pin] requested'); },
+          // Surface state to the shell's iframe registry. Inside Ikenga, readable from a
+          // terminal via `iyke iframe-state <pane>`. Outside Ikenga, parent === self so
+          // postMessage is a no-op — safe to call unconditionally. See SKILL.md
+          // "Surfacing state to the shell (`publishState`)".
+          publishState: function (key, value) {
+            try {
+              if (window.parent && window.parent !== window) {
+                window.parent.postMessage({ __iyke: true, kind: 'state', payload: { key: key, value: value } }, '*');
+              }
+            } catch (e) { /* parent cross-origin or unreachable; swallow */ }
+          },
         };
       });
     }
