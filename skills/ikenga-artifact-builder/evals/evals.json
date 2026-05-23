@@ -1,0 +1,26 @@
+{
+  "skill_name": "ikenga-artifact-builder",
+  "evals": [
+    {
+      "id": 0,
+      "name": "wizard-fastpath-dashboard",
+      "prompt": "Build a **dashboard** for project **royalti-io-website** (`/home/nedjamez/royalti-co/royalti-io-website`).\n\nSuggested path: `dashboards/content-health.html` (under the project root). Use that, or ask me where it should live.\n\nRead `.claude/skills/` in this project to know which sub-skills are available, then ask 2-3 clarifying questions about audience, tone, and structure before writing anything. Use the `ikenga-artifact-builder` skill for the build phase.\n\nThe dashboard should show content health for the marketing blog: total published posts, posts published this month, average words per post, and a table of the 8 most recent posts with title, author, status, and publish date. Use sensible mock data. The editor-in-chief is the audience; they want to scan it daily.",
+      "expected_output": "A single self-contained HTML dashboard at dashboards/content-health.html with a valid ikenga-manifest tag (license Apache-2.0), an ikenga-mock-data tag matching the data shape, KPI tiles, a recent-posts table, offline-renderable, no eval/Function/document.write, theme-token-aware.",
+      "files": []
+    },
+    {
+      "id": 1,
+      "name": "discover-path-cash-dashboard",
+      "prompt": "I'm working in /home/nedjamez/royalti-co/ikenga. Make me a self-contained HTML dashboard that shows our cash position and accounts-receivable aging — cash by bank account (4 accounts), total cash, and an AR aging table bucketed 0-30 / 31-60 / 61-90 / 90+ days with overdue rows highlighted. I'll open it in a browser now and inside Ikenga later for live data. Pick realistic mock numbers; don't make me answer a long questionnaire — just build it and tell me where it is.",
+      "expected_output": "A single self-contained HTML dashboard with valid manifest (Apache-2.0 license), mock-data tag, supabase/sql-style dataSources declared, AR aging table with overdue highlighting, cash-by-account display, renders offline, compatibility-clean.",
+      "files": []
+    },
+    {
+      "id": 2,
+      "name": "pricing-comparison-onepager",
+      "prompt": "Can you make me an HTML one-pager comparing our three pricing tiers — Free, Pro ($29/mo), and Enterprise (custom) — as a feature matrix the sales team can scan and share? Around 10 feature rows (seats, storage, API access, SSO, support SLA, etc.) with check/dash/value cells per tier. Save it somewhere sensible in the current project (/home/nedjamez/royalti-co/ikenga). Mock the feature data.",
+      "expected_output": "A single self-contained HTML one-pager comparison with valid manifest (Apache-2.0 license), mock-data tag, a 3-column feature matrix, renders offline, no banned APIs, theme-aware.",
+      "files": []
+    }
+  ]
+}

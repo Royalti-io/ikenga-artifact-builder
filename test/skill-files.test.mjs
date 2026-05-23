@@ -28,3 +28,20 @@ test('three reference artifacts present and non-empty', async () => {
     assert.match(buf.toString('utf8'), /<script type="application\/json" id="ikenga-mock-data">/, `${name} must have mock-data tag`);
   }
 });
+
+// Per ADR-009 every pkg/artifact ships Apache-2.0; the BUSL tier was retired.
+// The agent copies the manifest template + examples verbatim, so a stale
+// BUSL-1.1 here propagates into every generated artifact. Guard against it.
+test('manifest template + examples declare Apache-2.0, never BUSL', async () => {
+  const files = [
+    path.join(skillDir, 'SKILL.md'),
+    ...['hello-world.html', 'cfo-daily.html', 'ceo-overview.html'].map((n) =>
+      path.join(skillDir, 'references', n),
+    ),
+  ];
+  for (const p of files) {
+    const txt = await readFile(p, 'utf8');
+    assert.doesNotMatch(txt, /"license":\s*"BUSL-1\.1"/, `${path.basename(p)} must not embed a BUSL-1.1 manifest license`);
+    assert.match(txt, /"license":\s*"Apache-2\.0"/, `${path.basename(p)} must embed an Apache-2.0 manifest license`);
+  }
+});
