@@ -269,7 +269,7 @@ Start from this skeleton. Fill in the marked regions; do not restructure.
     "name": "{{Human Name}}",
     "version": "0.1.0",
     "description": "{{One-line purpose.}}",
-    "license": "BUSL-1.1",
+    "license": "Apache-2.0",
     "icon": { "lucide": "{{lucide-icon-name}}" },
     "dataSources": {
       /* declare every live source here; bridge auto-fetches on init */
@@ -297,8 +297,33 @@ Start from this skeleton. Fill in the marked regions; do not restructure.
 
   <!-- Styles. Tailwind via CDN OK. Inline custom styles below. -->
   <script src="https://cdn.tailwindcss.com"></script>
+  <!-- darkMode:'class' so `dark:` utilities track the Ikenga shell toggle
+       (the host bridge mirrors a `.dark` class) instead of the OS media query. -->
+  <script>tailwind.config = { darkMode: 'class' };</script>
+  <!-- Standalone theming. Inside Ikenga the injected host bridge has already
+       mirrored the shell's data-mode/data-theme + `.dark` onto <html> (and the
+       shell pre-injects @ikenga/tokens, so var(--bg-base) etc. resolve). This
+       block only runs OUTSIDE the shell, following the OS color scheme so a
+       shared artifact still does dark/light. -->
+  <script>
+    (function () {
+      if (window.__ikenga_host__) return; // in-shell: host bridge owns theme
+      var root = document.documentElement, mql = window.matchMedia('(prefers-color-scheme: dark)');
+      var apply = function () {
+        root.setAttribute('data-mode', mql.matches ? 'dark' : 'light');
+        root.setAttribute('data-theme', 'A');
+        root.classList.toggle('dark', mql.matches);
+      };
+      apply();
+      if (mql.addEventListener) mql.addEventListener('change', apply);
+      else if (mql.addListener) mql.addListener(apply);
+    })();
+  </script>
   <style>
-    /* custom styles only — keep minimal */
+    /* custom styles only — keep minimal. Palette-aware surfaces should use the
+       @ikenga/tokens custom properties (var(--bg-base), var(--bg-surface),
+       var(--fg), var(--fg-muted), var(--border), var(--primary), …) so they
+       track the shell's A/B/C theme. Tailwind utilities are fine for layout. */
   </style>
 
   <!-- React UMD (globals: React, ReactDOM). Pin minor — unpinned URLs occasionally serve breaking minors. -->
@@ -309,10 +334,14 @@ Start from this skeleton. Fill in the marked regions; do not restructure.
   <script src="https://cdn.jsdelivr.net/npm/@babel/standalone@7.25.6/babel.min.js"></script>
 </head>
 
-<body class="bg-neutral-50 text-neutral-900 dark:bg-neutral-950 dark:text-neutral-100 antialiased">
+<!-- Token-backed surfaces track the shell's A/B/C palette + light/dark. For a
+     simpler artifact you can instead use Tailwind neutrals
+     (`bg-neutral-50 text-neutral-900 dark:bg-neutral-950 dark:text-neutral-100`) —
+     those still flip light/dark via the `.dark` class, but won't pick up the palette. -->
+<body class="antialiased" style="background: var(--bg-base); color: var(--fg);">
   <!-- Visible placeholder so a JS-init failure is distinguishable from a CSS/HTML failure. -->
   <div id="root">
-    <div class="max-w-2xl mx-auto p-6 text-sm text-neutral-500">Initializing…</div>
+    <div class="max-w-2xl mx-auto p-6 text-sm" style="color: var(--fg-muted);">Initializing…</div>
   </div>
 
   <!--
@@ -489,11 +518,20 @@ art.notes.send("This chart needs a 90-day toggle", { selector: "#cash-chart" });
 ## Style guidance
 
 - **Default to system fonts** + Tailwind — looks clean, ships nothing extra.
-- **Respect `prefers-color-scheme`**: light + dark variants via Tailwind's `dark:` modifier.
+- **React to the shell theme.** Inside Ikenga the host bridge mirrors the shell's
+  `data-mode` (light/dark) + `data-theme` (A/B/C palette) + a `.dark` class onto the
+  artifact's `<html>`, live on every toggle, and the shell pre-injects `@ikenga/tokens`.
+  So: use the token custom properties (`var(--bg-base)`, `var(--bg-surface)`, `var(--fg)`,
+  `var(--fg-muted)`, `var(--border)`, `var(--primary)`, …) for surfaces/text/borders and
+  they track the active palette automatically. Tailwind `dark:` utilities also work
+  (template sets `darkMode:'class'`). Standalone (claude.ai / browser) the template's
+  inline script follows the OS `prefers-color-scheme`; palette defaults to A.
 - **Density**: dashboards skew dense (people scan). Mockups skew spacious. Pick one and commit.
-- **Don't reinvent chart libraries** — for any non-trivial chart, import `recharts` or `apache-echarts` via esm.sh. For sparklines or single-metric tiles, hand-rolled SVG is fine and lighter.
+- **Don't reinvent chart libraries** — for any non-trivial chart, import `recharts` or `apache-echarts` via esm.sh. For sparklines or single-metric tiles, hand-rolled SVG is fine and lighter. For chart colors that should match the theme, read `art.theme` (see cheat sheet) or pull `getComputedStyle(document.documentElement).getPropertyValue('--primary')`.
 - **Keep total visual elements ≤ 7 per screen.** If you have more, split into tabs or sub-pages (folder mode).
-- **Design tokens are optional.** Default template uses raw Tailwind. Artifacts that should match shell visual identity can import `@ikenga/tokens` via the `--with-tokens` preview flag. Don't import unless asked.
+- **Tokens vs. raw Tailwind.** Token-backed surfaces (above) are the default for anything
+  meant to feel native in the shell. Raw Tailwind neutrals are the lightweight fallback —
+  they still flip light/dark via `.dark`, but won't pick up the A/B/C palette.
 
 ## Workflow
 
@@ -507,12 +545,13 @@ art.notes.send("This chart needs a 90-day toggle", { selector: "#cash-chart" });
 ## Self-check before delivering
 
 - [ ] Manifest tag present and valid JSON
+- [ ] Manifest `license` is `Apache-2.0` (per ADR-009 every pkg/artifact ships Apache-2.0 — the BUSL tier was retired; don't copy a stale `BUSL-1.1` from older examples)
 - [ ] Mock data tag present, shape matches every dataSource
 - [ ] Renders with no network (mock-only)
 - [ ] No `eval`, `Function`, `document.write`, inline event handlers
 - [ ] All CDN imports from approved hosts
 - [ ] Single file under 500KB (or in folder mode)
-- [ ] Light + dark mode both legible
+- [ ] Reacts to shell theme: light + dark legible, palette-aware surfaces use tokens; OS fallback works standalone
 - [ ] `pin.section` is a sensible suggestion or omitted
 
 If any box is unchecked, fix before delivering.
@@ -521,7 +560,7 @@ If any box is unchecked, fix before delivering.
 
 > **Stable bridge contract.** The four surfaces named below — `art.publishState`, `art.notes`, `art.pin`, and `art.host` — are the **public bridge contract** pinned by the manifest's `requires.bridge ^1.0`. We won't break their shape inside the `1.x` line; additions are minor-version, removals are major. Composing skills (`groundwork`, downstream artifacts that ride the bridge for `iyke iframe-state` reads, the activity-bar pin handshake) depend on these names + signatures — they're as much a versioned API as `art.source(name).get/subscribe/refresh`.
 >
-> The `art.source` and `art.state` surfaces are equally stable (documented above). Anything not in this section or the source/state surfaces is **internal** — don't rely on it from outside the bridge polyfill.
+> The `art.source`, `art.state`, and `art.theme` surfaces are equally stable (documented above). Anything not in this section or the source/state/theme surfaces is **internal** — don't rely on it from outside the bridge polyfill.
 
 Inside the IIFE, after `init()`:
 
@@ -541,6 +580,14 @@ art.host.anyFallback();                  // true if any source did
 art.state.get(key);
 art.state.set(key, value);
 art.state.subscribe(key, fn);
+
+// Theme — live view of the host theme. CSS already tracks it via mirrored
+// `data-mode`/`data-theme` + `.dark` and the injected tokens; use this only
+// when you need theme in JS (e.g. canvas/chart colors).
+art.theme.mode;                          // 'light' | 'dark'
+art.theme.theme;                         // 'A' | 'B' | 'C' (palette variant)
+art.theme.density;                       // 'compact' | 'comfortable' | 'spacious'
+art.theme.subscribe(fn);                 // returns unsubscribe; fires on every toggle
 
 // Notes-back loop (host-mode only; no-op + clipboard fallback elsewhere)
 art.notes.send(text, { selector });

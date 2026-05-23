@@ -12,7 +12,7 @@
       - bridge resolves source (live fetch in browser, mock if CORS blocks)
       - JSX-via-Babel compiles
       - Tailwind via CDN renders
-      - light + dark mode legible
+      - reacts to the shell theme (data-mode/data-theme + tokens), OS fallback standalone
     Opens in: file:// (any browser), claude.ai's artifact viewer, future Ikenga shell.
   -->
 
@@ -25,7 +25,7 @@
     "name": "Hello, Artifact",
     "version": "0.1.0",
     "description": "Smallest valid Ikenga artifact. Lists users from a public API; falls back to mock when offline.",
-    "license": "BUSL-1.1",
+    "license": "Apache-2.0",
     "icon": { "lucide": "sparkles" },
     "dataSources": {
       "users": {
@@ -58,6 +58,26 @@
 
   <!-- Tailwind CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
+  <!-- darkMode:'class' so `dark:` tracks the Ikenga shell toggle (the host
+       bridge mirrors a `.dark` class), not the OS media query. -->
+  <script>tailwind.config = { darkMode: 'class' };</script>
+  <!-- Standalone theming: inside Ikenga the injected host bridge already
+       mirrored data-mode/data-theme + `.dark` (and pre-injected @ikenga/tokens).
+       Outside it, follow the OS color scheme; palette defaults to A. -->
+  <script>
+    (function () {
+      if (window.__ikenga_host__) return;
+      var root = document.documentElement, mql = window.matchMedia('(prefers-color-scheme: dark)');
+      var apply = function () {
+        root.setAttribute('data-mode', mql.matches ? 'dark' : 'light');
+        root.setAttribute('data-theme', 'A');
+        root.classList.toggle('dark', mql.matches);
+      };
+      apply();
+      if (mql.addEventListener) mql.addEventListener('change', apply);
+      else if (mql.addListener) mql.addListener(apply);
+    })();
+  </script>
 
   <!-- React UMD (globals: React, ReactDOM) -->
   <script crossorigin src="https://cdn.jsdelivr.net/npm/react@18.3.1/umd/react.production.min.js"></script>
@@ -137,6 +157,26 @@
             subscribe: function () { return function () {}; },
           },
           notes: { send: function (text, opts) { console.log('[ikenga.notes]', text, opts || {}); } },
+          // Theme — standalone view. The head script keeps <html> attributes in
+          // sync with the OS; we report them and fire subscribers on OS change.
+          // (In-shell the host bridge supplies the real handle, palette and all.)
+          theme: (function () {
+            var root = document.documentElement, mql = window.matchMedia('(prefers-color-scheme: dark)');
+            var themeSubs = [];
+            mql.addEventListener && mql.addEventListener('change', function () {
+              var snap = { mode: mql.matches ? 'dark' : 'light', theme: 'A', density: 'comfortable' };
+              themeSubs.slice().forEach(function (fn) { fn(snap); });
+            });
+            return {
+              get mode() { return root.getAttribute('data-mode') || (mql.matches ? 'dark' : 'light'); },
+              get theme() { return root.getAttribute('data-theme') || 'A'; },
+              get density() { return root.getAttribute('data-density') || 'comfortable'; },
+              subscribe: function (fn) {
+                themeSubs.push(fn);
+                return function () { themeSubs = themeSubs.filter(function (f) { return f !== fn; }); };
+              },
+            };
+          })(),
           pin: function () { console.log('[ikenga.pin] requested'); },
           // Surface state to the shell's iframe registry. Inside Ikenga, readable from a
           // terminal via `iyke iframe-state <pane>`. Outside Ikenga, parent === self so
@@ -158,9 +198,10 @@
   </script>
 </head>
 
-<body class="bg-neutral-50 text-neutral-900 dark:bg-neutral-950 dark:text-neutral-100 antialiased">
+<!-- Token-backed surfaces track the shell's A/B/C palette + light/dark. -->
+<body class="antialiased" style="background: var(--bg-base); color: var(--fg);">
   <div id="root">
-    <div class="max-w-2xl mx-auto p-6 text-sm text-neutral-500">Initializing…</div>
+    <div class="max-w-2xl mx-auto p-6 text-sm" style="color: var(--fg-muted);">Initializing…</div>
   </div>
 
   <script type="text/babel" data-presets="env,react">
@@ -171,6 +212,9 @@
         const [users, setUsers] = useState(art.source('users').get() || []);
         const [loading, setLoading] = useState(false);
         const [usingFallback, setUsingFallback] = useState(art.host.usedFallback('users'));
+        // Live theme readout — CSS already restyles via the mirrored tokens; this
+        // just keeps the JS-rendered label in sync. Demonstrates art.theme.subscribe.
+        const [, setThemeTick] = useState(0);
 
         useEffect(() => {
           return art.source('users').subscribe((v) => {
@@ -178,6 +222,8 @@
             setUsingFallback(art.host.usedFallback('users'));
           });
         }, []);
+
+        useEffect(() => art.theme.subscribe(() => setThemeTick((n) => n + 1)), []);
 
         const refresh = async () => {
           setLoading(true);
@@ -196,31 +242,35 @@
             <header className="flex items-baseline justify-between mb-6">
               <div>
                 <h1 className="text-2xl font-semibold">Hello, Artifact</h1>
-                <p className="text-sm text-neutral-500 mt-1">
-                  {users.length} {users.length === 1 ? 'user' : 'users'} loaded · host: <span className="font-mono">{art.host.kind}</span>
+                <p className="text-sm mt-1" style={{ color: 'var(--fg-muted)' }}>
+                  {users.length} {users.length === 1 ? 'user' : 'users'} loaded · host: <span className="font-mono">{art.host.kind}</span> · theme: <span className="font-mono">{art.theme.theme}/{art.theme.mode}</span>
                 </p>
               </div>
               <button
                 onClick={refresh}
                 disabled={loading}
-                className="px-3 py-1.5 text-sm rounded border border-neutral-300 dark:border-neutral-700 hover:bg-neutral-100 dark:hover:bg-neutral-800 disabled:opacity-50 transition-colors"
+                className="px-3 py-1.5 text-sm rounded disabled:opacity-50 transition-colors"
+                style={{ border: '1px solid var(--border)', background: 'var(--bg-surface)' }}
               >
                 {loading ? 'Refreshing…' : 'Refresh'}
               </button>
             </header>
 
-            <ul className="divide-y divide-neutral-200 dark:divide-neutral-800 rounded-lg border border-neutral-200 dark:border-neutral-800 overflow-hidden bg-white dark:bg-neutral-900">
-              {users.slice(0, 5).map((u) => (
-                <li key={u.id} className="p-4">
+            <ul
+              className="rounded-lg overflow-hidden"
+              style={{ border: '1px solid var(--border)', background: 'var(--bg-surface)' }}
+            >
+              {users.slice(0, 5).map((u, i) => (
+                <li key={u.id} className="p-4" style={i > 0 ? { borderTop: '1px solid var(--border-soft, var(--border))' } : undefined}>
                   <div className="font-medium">{u.name}</div>
-                  <div className="text-sm text-neutral-500 mt-0.5">
+                  <div className="text-sm mt-0.5" style={{ color: 'var(--fg-muted)' }}>
                     {u.email} · {u.company && u.company.name}
                   </div>
                 </li>
               ))}
             </ul>
 
-            <footer className="mt-6 text-xs text-neutral-400">
+            <footer className="mt-6 text-xs" style={{ color: 'var(--fg-subtle, var(--fg-muted))' }}>
               Ikenga artifact · v0.1 · open in claude.ai or Ikenga shell for live data
             </footer>
           </div>
