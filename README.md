@@ -1,5 +1,11 @@
 # ikenga-artifact-builder
 
+[![License](https://img.shields.io/badge/license-Apache--2.0-blue.svg)](LICENSE)
+
+> A Claude Code skill that authors single-file HTML artifacts — dashboards, views,
+> comparisons, mockups — that render standalone anywhere and light up with live data inside
+> the Ikenga shell.
+
 A Claude Code skill that teaches the agent to author **single-file HTML
 artifacts** — dashboards, views, comparisons, mockups — that:
 
@@ -71,6 +77,12 @@ See [`skills/ikenga-artifact-builder/SKILL.md`](skills/ikenga-artifact-builder/S
 for the full agent-facing spec: trigger rules, hard constraints,
 single-file template, data-source types, refresh modes, CSP
 compatibility, bridge API cheat sheet.
+
+## Links
+
+- [ikenga.dev](https://ikenga.dev) — site + docs
+- [`ikenga-contract`](https://github.com/Royalti-io/ikenga-contract) — the artifact manifest schema this skill emits against
+- [`ikenga`](https://github.com/Royalti-io/ikenga) — the desktop shell that hydrates artifacts with live data
 
 ## License
 
