@@ -1,0 +1,45 @@
+# Version @ikenga/skill-artifact-builder via Changesets.
+#
+# This package is PRIVATE (distributed via `npx skills add`, not npm), so there
+# is no publish step — Changesets is used only to derive the version + CHANGELOG.
+#
+# Flow: PR with a changeset (`npx changeset`) → on merge to main this opens a
+# "chore: version packages" PR that bumps the version + writes CHANGELOG.md.
+# Merging that PR lands the new version on main (no npm publish).
+
+name: Release
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+concurrency: ${{ github.workflow }}-${{ github.ref }}
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  version:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-node@v6
+        with:
+          node-version: 20
+
+      - name: Install
+        run: npm install
+
+      - name: Create Release PR (version + changelog only — private, no publish)
+        uses: changesets/action@v1
+        with:
+          version: npx changeset version
+          title: 'chore: version packages'
+          commit: 'chore: version packages'
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
