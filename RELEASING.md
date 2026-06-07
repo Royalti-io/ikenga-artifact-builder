@@ -1,4 +1,6 @@
-# Contributing to @ikenga/skill-artifact-builder
+# Releasing @ikenga/skill-artifact-builder
+
+> Contributing in general? See the org-wide [CONTRIBUTING guide](https://github.com/Royalti-io/.github/blob/main/CONTRIBUTING.md) and [ikenga.dev/docs/contributing](https://ikenga.dev/docs/contributing). This file covers **releases** only.
 
 ## Versioning — Changesets
 
