@@ -7,8 +7,8 @@ set this up; pick one.
 ## Path 1 — Dashboard (recommended, one-time)
 
 1. Cloudflare dashboard → **Workers & Pages → Create → Pages → Connect to Git**.
-2. Authorise the **Royalti-io** GitHub account if Cloudflare hasn't seen it before.
-3. Pick repo **`Royalti-io/ikenga-artifact-builder`**.
+2. Authorise the **ikenga-hq** GitHub account if Cloudflare hasn't seen it before.
+3. Pick repo **`ikenga-hq/ikenga-artifact-builder`**.
 4. Build settings:
    - **Project name**: `ikenga-artifacts` (this becomes `ikenga-artifacts.pages.dev`)
    - **Production branch**: `main`

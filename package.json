@@ -12,11 +12,11 @@
   ],
   "homepage": "https://ikenga.dev",
   "bugs": {
-    "url": "https://github.com/royalti-io/ikenga-artifact-builder/issues"
+    "url": "https://github.com/ikenga-hq/ikenga-artifact-builder/issues"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/royalti-io/ikenga-artifact-builder.git"
+    "url": "https://github.com/ikenga-hq/ikenga-artifact-builder.git"
   },
   "license": "Apache-2.0",
   "private": true,

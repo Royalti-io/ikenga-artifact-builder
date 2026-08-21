@@ -24,29 +24,29 @@ Cursor, OpenCode, and 50+ other agents.
 
 ```bash
 # Global install (recommended — available across all projects)
-npx skills add royalti-io/ikenga-artifact-builder -g
+npx skills add ikenga-hq/ikenga-artifact-builder -g
 
 # Project install (committed with your repo, shared with team)
-npx skills add royalti-io/ikenga-artifact-builder
+npx skills add ikenga-hq/ikenga-artifact-builder
 ```
 
 Target a specific agent if you have several configured:
 
 ```bash
-npx skills add royalti-io/ikenga-artifact-builder -g -a claude-code
+npx skills add ikenga-hq/ikenga-artifact-builder -g -a claude-code
 ```
 
 ### Git clone
 
 ```bash
-git clone https://github.com/royalti-io/ikenga-artifact-builder.git
+git clone https://github.com/ikenga-hq/ikenga-artifact-builder.git
 cp -r ikenga-artifact-builder/skills/ikenga-artifact-builder ~/.claude/skills/
 ```
 
 ### Curl one-liner
 
 ```bash
-curl -sSL https://raw.githubusercontent.com/royalti-io/ikenga-artifact-builder/main/install.sh | bash
+curl -sSL https://raw.githubusercontent.com/ikenga-hq/ikenga-artifact-builder/main/install.sh | bash
 ```
 
 The installer drops the skill into `~/.claude/skills/ikenga-artifact-builder/`
@@ -81,8 +81,8 @@ compatibility, bridge API cheat sheet.
 ## Links
 
 - [ikenga.dev](https://ikenga.dev) — site + docs
-- [`ikenga-contract`](https://github.com/Royalti-io/ikenga-contract) — the artifact manifest schema this skill emits against
-- [`ikenga`](https://github.com/Royalti-io/ikenga) — the desktop shell that hydrates artifacts with live data
+- [`ikenga-contract`](https://github.com/ikenga-hq/ikenga-contract) — the artifact manifest schema this skill emits against
+- [`ikenga`](https://github.com/ikenga-hq/ikenga) — the desktop shell that hydrates artifacts with live data
 
 ## License
 
